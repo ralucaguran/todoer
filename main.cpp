@@ -39,6 +39,9 @@ int main(int ac, char* av[]) {
     catch (boost::program_options::invalid_command_line_syntax& e) {
         std::cerr << e.what() << std::endl; 
     }
+    catch (boost::program_options::unknown_option& e) {
+        std::cerr << e.what() << std::endl;
+    }
 	po::notify(vm);
 
 	if(vm.count("help")) {

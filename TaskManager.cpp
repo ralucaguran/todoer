@@ -15,7 +15,7 @@ void TaskManager::listAll() {
 	std::list<Task> tasks = serializer->load();
 	int idx = 0;
 	BOOST_FOREACH(Task task, tasks) {
-		std::cout << std::right << std::setw(3) << '[' << ++idx << ']';
+		std::cout << std::right << std::setw(3) << '[' << ++idx << "] ";
 		printer->print(task.toString());
 	}
 }

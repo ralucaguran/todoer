@@ -1,4 +1,5 @@
 #include "Task.h"
+#include "Util.h"
 
 #include <iostream>
 #include <sstream>
@@ -7,6 +8,16 @@
 const char* Task::prio[LAST_PRIO] = {"low", "normal", "high"};
 const char* Task::stat[LAST_STATUS] = {"new", "in progress", "complete"};
 
+enum COLOR {
+    BLACK=30,
+    RED,
+    GREEN,
+    YELLOW,
+    BLUE,
+    MAGENTA,
+    CYAN,
+    WHITE,
+};
 
 Task::Task() {
 
@@ -20,13 +31,13 @@ Task::Task(const std::string& theDescription, Priority thePriority, Status theSt
 const std::string Task::toString() const {
 	std::string colorCode;
 	if(priority == HIGH && status != COMPLETE) {
-		colorCode = "31m";
+		colorCode = intToString(RED) + 'm';
 	}
 	else if(priority == NORMAL && status != COMPLETE) {
-		colorCode = "32m";
+		colorCode = intToString(YELLOW) + 'm';
 	}
 	else {
-		colorCode = "37m";
+		colorCode = intToString(WHITE) + 'm';
 	}
 
 	std::ostringstream taskString;
@@ -39,8 +50,6 @@ const std::string Task::toString() const {
 	taskString << "\033[0;" << colorCode;
 	taskString << std::left << std::setw(100) << description;
 	taskString << "\033[0m";
-	//std::string sep(3+12+12+100+3, '_');
-	//taskString << std::endl << sep;
 
 	return taskString.str();
 }
