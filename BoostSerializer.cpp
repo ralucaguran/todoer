@@ -29,9 +29,11 @@ void BoostSerializer::save(const std::list<Task>& tasks) {
 
 std::list<Task> BoostSerializer::load() {
 	std::ifstream ifs(fileName.c_str());
-	boost::archive::text_iarchive ia(ifs);
-	std::list<Task> taskList;
-	ia >> taskList;
-	return taskList;
+    std::list<Task> taskList;
+    if (ifs.good()) {
+        boost::archive::text_iarchive ia(ifs);
+        ia >> taskList;
+    }
+    return taskList;
 }
 

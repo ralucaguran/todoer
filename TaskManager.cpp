@@ -95,7 +95,6 @@ void TaskManager::changePriority(const std::vector<int>& taskIndices, Priority p
 void TaskManager::cleanup() {
     std::list<Task> taskList = serializer->load();
     taskList.remove_if([] (const Task& t) { return t.getStatus() == COMPLETE; });
-    std::cout << "cleanup" << std::endl;
     serializer->save(taskList);
 }
 
